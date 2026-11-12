@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mapar — Barcelona</title>
+
+  <!-- MapLibre GL JS -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <!-- Socket.io (carregat després pel backend, fallback silenciós) -->
+  <script src="/socket.io/socket.io.js" onerror="window.__SOCKET_UNAVAILABLE=true"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Toolbar -->
+  <div id="toolbar">
+    <div id="tool-buttons">
+      <button class="tool-btn active" data-tool="brush" title="Pinzell">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+          <path d="M2 2l7.586 7.586"/>
+          <circle cx="11" cy="11" r="2"/>
+        </svg>
+      </button>
+      <button class="tool-btn" data-tool="eraser" title="Goma d'esborrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 20H7L3 16c-.8-.8-.8-2 0-2.8l10-10c.8-.8 2-.8 2.8 0l5.2 5.2c.8.8.8 2 0 2.8L16 16"/>
+          <path d="M6 11l7 7"/>
+        </svg>
+      </button>
+      <button class="tool-btn" data-tool="move" title="Desplaçar-se">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="5,9 2,12 5,15"/>
+          <polyline points="9,5 12,2 15,5"/>
+          <polyline points="15,19 12,22 9,19"/>
+          <polyline points="19,9 22,12 19,15"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <line x1="12" y1="2" x2="12" y2="22"/>
+        </svg>
+      </button>
+    </div>
+    <div id="color-palette"></div>
+  </div>
+
+  <!-- Compass & controls (top right) -->
+  <div id="controls-top">
+    <button id="compass-btn" title="Restablir al Nord">
+      <svg id="compass-svg" width="36" height="36" viewBox="0 0 36 36">
+        <circle cx="18" cy="18" r="16" fill="none" stroke="#999" stroke-width="1.5"/>
+        <polygon points="18,4 21,16 18,14 15,16" fill="#E74C3C"/>
+        <polygon points="18,32 15,20 18,22 21,20" fill="#999"/>
+        <text x="18" y="3" text-anchor="middle" font-size="7" fill="#E74C3C" font-weight="bold">N</text>
+      </svg>
+    </button>
+    <button id="align-eixample-btn" title="Alinear amb l'Eixample (-45°)">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="16" height="16" rx="1" transform="rotate(-45 10 10)"/>
+        <line x1="10" y1="2" x2="10" y2="18" stroke-dasharray="2"/>
+        <line x1="2" y1="10" x2="18" y2="10" stroke-dasharray="2"/>
+      </svg>
+    </button>
+    <div id="user-count" title="Usuaris connectats">
+      <span id="user-count-dot"></span>
+      <span id="user-count-num">1</span>
+    </div>
+  </div>
+
+  <script src="map.js"></script>
+</body>
+</html>

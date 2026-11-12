@@ -1,0 +1,207 @@
+/* ============================================
+   MAPAR — Style Sheet
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #FFFFFF;
+  touch-action: none;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Remove MapLibre default attribution padding */
+.maplibregl-ctrl-bottom-left,
+.maplibregl-ctrl-bottom-right {
+  display: none;
+}
+
+/* ============================================
+   Toolbar (bottom center)
+   ============================================ */
+
+#toolbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  user-select: none;
+}
+
+#tool-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.tool-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.tool-btn:hover {
+  background: #F0F0F0;
+  color: #333;
+}
+
+.tool-btn.active {
+  background: #333;
+  color: #FFF;
+}
+
+#color-palette {
+  display: flex;
+  gap: 6px;
+  padding-left: 8px;
+  border-left: 1px solid #E0E0E0;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.color-swatch:hover {
+  transform: scale(1.15);
+}
+
+.color-swatch.active {
+  border-color: #333;
+  box-shadow: 0 0 0 2px #FFF, 0 0 0 4px #333;
+}
+
+/* ============================================
+   Top Controls (compass, align, user count)
+   ============================================ */
+
+#controls-top {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+}
+
+#compass-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+#compass-btn:hover {
+  transform: scale(1.05);
+}
+
+#align-eixample-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.15s ease;
+}
+
+#align-eixample-btn:hover {
+  background: #333;
+  color: #FFF;
+}
+
+#user-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+#user-count-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2ECC71;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================
+   Map cursor overrides
+   ============================================ */
+
+.cursor-brush .maplibregl-canvas {
+  cursor: crosshair !important;
+}
+
+.cursor-eraser .maplibregl-canvas {
+  cursor: cell !important;
+}
+
+.cursor-move .maplibregl-canvas {
+  cursor: grab !important;
+}
+
+.cursor-move .maplibregl-canvas:active {
+  cursor: grabbing !important;
+}
